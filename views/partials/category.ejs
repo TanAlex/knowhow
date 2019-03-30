@@ -1,0 +1,3 @@
+<% i=0; for(cat of categories){ %>
+<li class="cat-item cat-item-5"><a href="/category/<%=cat.id%>" title="<%=cat.name%>"><%=cat.name%> <span class="badge pull-right"><%=cat.detail.total_articles%></span></a></li>
+<%}%>

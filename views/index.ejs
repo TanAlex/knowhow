@@ -6,45 +6,7 @@
 <html lang="en-US">
 <!--<![endif]-->
 
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{{title}}</title>
-
-<style type="text/css">
-img.wp-smiley,
-img.emoji {
-	display: inline !important;
-	border: none !important;
-	box-shadow: none !important;
-	height: 1em !important;
-	width: 1em !important;
-	margin: 0 .07em !important;
-	vertical-align: -0.1em !important;
-	background: none !important;
-	padding: 0 !important;
-}
-</style>
-<link rel='stylesheet' id='bootstrap-css'  href='/assets/bootstrap/css/bootstrap.min7984.css?ver=3.3.4' type='text/css' media='all' />
-<link rel='stylesheet' id='font-awesome-css'  href='/assets/font-awesome/css/font-awesome.minb2f9.css?ver=4.3.0' type='text/css' media='all' />
-<link rel='stylesheet' id='nowknow-fonts-css'  href='http://fonts.googleapis.com/css?family=Open+Sans%3A300%2C300i%2C400%2C400i%2C600%2C600i%2C700%2C700i%2C800%2C800i' type='text/css' media='all' />
-<link rel='stylesheet' id='nowknow-style-css'  href='/css/style2fca.css?ver=1.4.0' type='text/css' media='all' />
-<style id='nowknow-style-inline-css' type='text/css'>
-html,body{font-weight:400;font-size:14px;font-family:'Open Sans',sans-serif;color:#333333;}
-h1,.h1{font-weight:600;font-size:36px;font-family:'Open Sans',sans-serif;color:#333333;}
-h2,.h2{font-weight:600;font-size:30px;font-family:'Open Sans',sans-serif;color:#333333;}
-h3,.h3{font-weight:600;font-size:24px;font-family:'Open Sans',sans-serif;color:#333333;}
-h4,.h4{font-weight:600;font-size:18px;font-family:'Open Sans',sans-serif;color:#333333;}
-h5,.h5{font-weight:600;font-size:14px;font-family:'Open Sans',sans-serif;color:#333333;}
-h6,.h6{font-weight:600;font-size:12px;font-family:'Open Sans',sans-serif;color:#333333;}
-a{color:#bb0000;}
-a:hover,a:focus{color:#880000;}
-.site-hero{background:#ff670f;}
-</style>
-<script type='text/javascript' src='/js/jquery/jquery4a80.js?ver=1.11.2'></script>
-<script type='text/javascript' src='/js/jquery/jquery-migrate.min1576.js?ver=1.2.1'></script>
-
-</head>
+<%- include('partials/header.ejs') %>
 
 <body class="home page page-id-43 page-template page-template-page-front-page page-template-page-front-page-php">
 
@@ -162,54 +124,30 @@ a:hover,a:focus{color:#880000;}
 					<div class="row">
 	<div id="content" class="site-content col-md-9">
 
-		<section id="category_articles-2" class="section home-block widget_category_articles"><div class="row"><div class="col-md-6">
+		<section id="category_articles-2" class="section home-block widget_category_articles">
+		<div class="row">
+<% i=0; for(cat of categories){ %>
+
+<div class="col-md-6">
 	<section id="section-category-2" class="box-categories">
-		<h1 class="section-title h4 clearfix"><i class="fa fa-folder-open-o fa-fw text-muted"></i><small class="pull-right"><i class="fa fa-hdd-o fa-fw"></i> 1</small> Account Settings</h1>
-
+		<h1 class="section-title h4 clearfix"><i class="fa fa-folder-open-o fa-fw text-muted"></i><small class="pull-right"><i class="fa fa-hdd-o fa-fw"></i> <%=cat.detail.total_articles %></small> <%=cat.detail.category_name %></h1>
+	<% for(article of cat.detail.articles){ %>
 		<ul class="fa-ul">
-						<li><i class="fa-li fa fa-list-alt fa-fw text-muted"></i><h3 class="h5"><a href="2013/10/28/nulla-bibendum-vel-ipsum-ut-suscipit/index.html">Nulla Bibendum Vel Ipsum ut Suscipit</a></h3></li>
-					</ul>
-
+			<li><i class="fa-li fa fa-list-alt fa-fw text-muted"></i><h3 class="h5"><a href="2013/10/28/nulla-bibendum-vel-ipsum-ut-suscipit/index.html"><%=article.title %></a></h3></li>
+		</ul>
+    <% }%>
 		<p class="more-link text-center"><a href="category/account-settings/index.html" class="btn btn-custom btn-xs">View All</a></p>
 	</section>
 </div>
-<div class="col-md-6">
-	<section id="section-category-3" class="box-categories">
-		<h1 class="section-title h4 clearfix"><i class="fa fa-folder-open-o fa-fw text-muted"></i><small class="pull-right"><i class="fa fa-hdd-o fa-fw"></i> 2</small> API Questions</h1>
 
-		<ul class="fa-ul">
-						<li><i class="fa-li fa fa-picture-o fa-fw text-muted"></i><h3 class="h5"><a href="2013/10/28/integer-ultrices-laoreet-egestas-2-pages/index.html">Integer Ultrices Laoreet Egestas &#8211; 2 Pages</a></h3></li>
-						<li><i class="fa-li fa fa-list-alt fa-fw text-muted"></i><h3 class="h5"><a href="2013/10/26/suspendisse-tincidunt-imperdiet-nibh-mollis-malesuada/index.html">Suspendisse Tincidunt Imperdiet Nibh Mollis Malesuada</a></h3></li>
-					</ul>
+<%   if(i % 2 != 0) { %>
+	<div class="clearfix"></div> 
+<%  }%>
+<% i++ %>
+<%}%>
+</div></section>
 
-		<p class="more-link text-center"><a href="category/api-questions/index.html" class="btn btn-custom btn-xs">View All</a></p>
-	</section>
-</div>
-<div class="clearfix"></div><div class="col-md-6">
-	<section id="section-category-4" class="box-categories">
-		<h1 class="section-title h4 clearfix"><i class="fa fa-folder-open-o fa-fw text-muted"></i><small class="pull-right"><i class="fa fa-hdd-o fa-fw"></i> 1</small> Customization</h1>
-
-		<ul class="fa-ul">
-						<li><i class="fa-li fa fa-list-alt fa-fw text-muted"></i><h3 class="h5"><a href="2013/10/26/fusce-commodo-neque-sapien-eu-pellentesque-arcu-posuere/index.html">Fusce Commodo Neque Sapien, eu Pellentesque Arcu Posuere</a></h3></li>
-					</ul>
-
-		<p class="more-link text-center"><a href="category/customization/index.html" class="btn btn-custom btn-xs">View All</a></p>
-	</section>
-</div>
-<div class="col-md-6">
-	<section id="section-category-5" class="box-categories">
-		<h1 class="section-title h4 clearfix"><i class="fa fa-folder-open-o fa-fw text-muted"></i><small class="pull-right"><i class="fa fa-hdd-o fa-fw"></i> 5</small> Mobile Apps</h1>
-
-		<ul class="fa-ul">
-						<li><i class="fa-li fa fa-picture-o fa-fw text-muted"></i><h3 class="h5"><a href="2013/11/06/lorem-ipsum-dolor-sit-amet/index.html">Lorem Ipsum Dolor Sit Amet</a></h3></li>
-						<li><i class="fa-li fa fa-film fa-fw text-muted"></i><h3 class="h5"><a href="2013/11/03/how-to-download-our-ipad-app/index.html">How To Download Our iPad App</a></h3></li>
-						<li><i class="fa-li fa fa-list-alt fa-fw text-muted"></i><h3 class="h5"><a href="2013/10/28/phasellus-feugiat-lobortis-libero-quis-laoreet/index.html">Phasellus Feugiat Lobortis Libero Quis Laoreet</a></h3></li>
-					</ul>
-
-		<p class="more-link text-center"><a href="category/mobile-apps/index.html" class="btn btn-custom btn-xs">View All</a></p>
-	</section>
-</div>
-<div class="clearfix"></div></div></section><section id="text_banner-3" class="section home-block widget_text_banner"><div class="banner-wrapper text-center clearfix"><h3 class="banner-title h4">Need more support?</h3>
+<section id="text_banner-3" class="section home-block widget_text_banner"><div class="banner-wrapper text-center clearfix"><h3 class="banner-title h4">Need more support?</h3>
 <div class="banner-content">If you did not found an answer, contact us for further help.</div>
 <a href="contact-us/index.html" class="btn btn-custom btn-sm">Contact Now</a></div></section><section id="recent_articles-2" class="section home-block widget_recent_articles"><div class="row"><div class="col-md-6">
 	<section id="section-lastest-comment" class="section">
@@ -239,19 +177,13 @@ a:hover,a:focus{color:#880000;}
 <div id="sidebar" class="site-sidebar col-md-3">
 	<div class="widget-area">
 		<aside id="text_banner-2" class="section widget widget_text_banner"><div class="banner-wrapper text-center clearfix"><h3 class="banner-title h4">Support Policy</h3>
-<div class="banner-content">Praesent neque nibh, vulputate id bibendum et, lacinia vel mi. Ut elementum nisi et congue facilisis. Praesent suscipit nulla eu lorem dictum, a ultricies orci pretium.</div></div></aside><aside id="article_categories-2" class="section widget widget_article_categories"><h3 class="section-title h4 clearfix">Categories</h3><ul class="nav nav-pills nav-stacked nav-categories">	<li class="cat-item cat-item-5"><a href="category/mobile-apps/index.html" title="Mobile apps playground :)">Mobile Apps <span class="badge pull-right">5</span></a>
-</li>
-	<li class="cat-item cat-item-3"><a href="category/api-questions/index.html" title="Knowledge base about API">API Questions <span class="badge pull-right">2</span></a>
-</li>
-	<li class="cat-item cat-item-1"><a href="category/uncategorized/index.html" >Uncategorized <span class="badge pull-right">1</span></a>
-</li>
-	<li class="cat-item cat-item-2"><a href="category/account-settings/index.html" title="The description about account settings">Account Settings <span class="badge pull-right">1</span></a>
-</li>
-	<li class="cat-item cat-item-4"><a href="category/customization/index.html" title="The description about customization application">Customization <span class="badge pull-right">1</span></a>
-</li>
-	<li class="cat-item cat-item-6"><a href="category/other/index.html" >Other <span class="badge pull-right">1</span></a>
-</li>
-</ul></aside><aside id="tag_cloud-2" class="section widget widget_tag_cloud"><h3 class="section-title h4 clearfix">Tags</h3><div class="tagcloud"><a href='tag/first-post/index.html' class='tag-link-7' title='1 topic' style='font-size: 8pt;'>first post</a>
+<div class="banner-content">Praesent neque nibh, vulputate id bibendum et, lacinia vel mi. Ut elementum nisi et congue facilisis. Praesent suscipit nulla eu lorem dictum, a ultricies orci pretium.</div></div></aside>
+
+<aside id="article_categories-2" class="section widget widget_article_categories"><h3 class="section-title h4 clearfix">Categories</h3>
+<ul class="nav nav-pills nav-stacked nav-categories">
+<%- include('partials/category.ejs') %>
+</ul></aside>
+<aside id="tag_cloud-2" class="section widget widget_tag_cloud"><h3 class="section-title h4 clearfix">Tags</h3><div class="tagcloud"><a href='tag/first-post/index.html' class='tag-link-7' title='1 topic' style='font-size: 8pt;'>first post</a>
 <a href='tag/gallery/index.html' class='tag-link-8' title='1 topic' style='font-size: 8pt;'>Gallery</a>
 <a href='tag/hello-world/index.html' class='tag-link-10' title='1 topic' style='font-size: 8pt;'>hello world</a>
 <a href='tag/image/index.html' class='tag-link-11' title='1 topic' style='font-size: 8pt;'>Image</a>
@@ -380,17 +312,7 @@ a:hover,a:focus{color:#880000;}
 			
 	</div><!-- #page -->
 
-<script type='text/javascript' src='/js/hoverIntent.minc245.js?ver=1.8.1'></script>
-<script type='text/javascript' src='/assets/bootstrap/js/bootstrap.min7984.js?ver=3.3.4'></script>
-<script type='text/javascript' src='/assets/js/superfish3e0d.js?ver=1.7.3'></script>
-<script type='text/javascript' src='/assets/js/mobilemenu4963.js?ver=1.1'></script>
-<script type='text/javascript' src='/js/autocomplete4281.js?ver=1.2.7'></script>
-<script type='text/javascript' src='/assets/js/fitvids5152.js?ver=1.0'></script>
-
-<script type='text/javascript' src='/assets/js/app2fca.js?ver=1.4.0'></script>
-<script type='text/javascript' src='/js/comment-reply.min3a05.js?ver=4.2.2'></script>
-<script type='text/javascript' src='/plugins/nowknow-bs-shortcodes/js/nowknow-shortcodes1576.js?ver=1.2.1'></script>
-<script type='text/javascript' src='/plugins/nowknow-plugin/js/holder.min001e.js?ver=2.0.0'></script>
+<%- include('partials/footer.ejs') -%>
 
 </body>
 </html>

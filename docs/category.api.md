@@ -44,7 +44,7 @@ tags model:
 ```
 
 - get_categories()
-```
+```js
   returns category model list
   {
       categories:[
@@ -62,4 +62,38 @@ tags model:
         }
       ]
   }
+```
+
+
+## Data Result
+```js
+[
+{
+    id: 4,
+    name: 'Office',
+    status: 1,
+    description: 'Office related articles',
+    detail:
+     { category_id: 4,
+       category_name: 'Office',
+       category_description: 'Office related articles',
+       total_articles: 2,
+       articles: [Array] 
+    } 
+},
+{
+    id: 5,
+    name: 'Databases',
+    status: 1,
+    description: 'Databases related articles',
+    detail:
+     { category_id: 5,
+       category_name: 'Databases',
+       category_description: 'Databases related articles',
+       total_articles: 0,
+       articles: [] 
+     } 
+},
+
+]
 ```
