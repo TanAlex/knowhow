@@ -8,6 +8,8 @@ front:
     - mysql:mysql
     - mongo:mongo
     - redis:redis
+  environment:
+    - ENVIRONMENT=${ENVIRONMENT}
   volumes:
     - ./www:/var/www
     - ./sites:/etc/nginx/conf.d
