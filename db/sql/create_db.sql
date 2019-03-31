@@ -1,4 +1,12 @@
+
 CREATE DATABASE knowhow;
+CREATE USER 'admin'@'%' identified by 'p@ssw0rd!';
+GRANT ALL  on knowhow.* to 'admin'@'%';
+
+--- If mysql is > 8.0
+-- mysql> ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'root';
+-- mysql> ALTER USER 'admin'@'%' IDENTIFIED WITH mysql_native_password BY 'admin'; 
+
 USE knowhow;
 
 DROP TABLE IF EXISTS categories;

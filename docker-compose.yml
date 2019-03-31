@@ -11,14 +11,19 @@ front:
   volumes:
     - ./www:/var/www
     - ./sites:/etc/nginx/conf.d
-    - ./logs:/var/log/supervisor
+    - ./logs:/logs
 
 mysql:
   image: mysql
   ports:
     - "3306:3306"
   environment:
+    MYSQL_ROOT_USER: root
     MYSQL_ROOT_PASSWORD: p@ssword!
+    MYSQL_DATABASE: knowhow
+    MYSQL_USER: admin
+    MYSQL_PASSWORD: p@ssword!
+
 
 mongo:
   image: mongo

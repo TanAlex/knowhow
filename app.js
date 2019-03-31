@@ -16,7 +16,11 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 var DB = require('./libs/DB');
-global.configs = require('./configs/configs.js');
+
+//docker-compose -e ENVIRONMENT=PROD up -d
+//ENVIRONMENT can be "DEV", "PROD", "STAGING"
+const env = process.env.ENVIRONMENT || "DEV"
+global.configs = require(`./configs/configs.${env}.js`);
 global.db = new DB(configs.dbConfig);
 
 app.use(logger('dev'));

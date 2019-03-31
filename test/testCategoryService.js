@@ -1,6 +1,6 @@
 var DB = require('../libs/DB');
 //var crypto = require('../libs/Crypto');
-var configs = require('../configs/configs.js');
+var configs = require('../configs/configs.DEV.js/index.js');
 //var Users = require('../models/Users');
 Categories = require("../services/categories");
 
