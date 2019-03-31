@@ -1,4 +1,5 @@
 front:
+  image: worker01:5000/knowhow_front
   build: .
   ports:
     - "80:80"
