@@ -10,6 +10,8 @@ build -t simartar/knowhow .
 
 ```
 
+
+
 ### Deploy process
 ```
 mkdir /app
