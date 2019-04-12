@@ -49,4 +49,8 @@ config.mailOptions = {
   }
 }
 
+config.jwtOptions = {
+  secret: 'awd12$@!*&%!o=-'
+}
+
 module.exports = config

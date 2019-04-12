@@ -23,6 +23,17 @@ const env = process.env.ENVIRONMENT || "DEV"
 global.configs = require(`./configs/configs.${env}.js`);
 global.db = new DB(configs.dbConfig);
 
+var session = require('express-session');
+var MySQLStore = require('express-mysql-session')(session);
+var store = new MySQLStore(configs.dbSessionOptions);
+
+//var RedisStore = require('connect-redis')(session);
+//var store = new RedisStore(configs.redisOptions);
+
+configs.sessionOptions.store = store;
+
+app.use(session(configs.sessionOptions));
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

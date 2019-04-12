@@ -10,9 +10,7 @@ module.exports = function wrapper(func){
             data: null
         }
         try {
-            res._result_ = result;
-            await func(req, res, next);
-            result = res._result_;
+            await func(req, res, result);
         }catch(err){
             result.err = 500;
             console.log(err);

@@ -11,7 +11,7 @@ config.dbConfig= {
   host: 'localhost',
   port: 53306,
   user: 'admin',
-  password: 'P@ssw0rd!',
+  password: 'p@ssw0rd!',
   database: 'knowhow'
 }
 
@@ -47,6 +47,10 @@ config.mailOptions = {
       user: "AKIAISTEQLLV7W4HNDDQ",  //email user
       pass: "AsFl4nhkitcg5aJY74ibihVGTcIiHhB2Tw21UdZM5/MJ"  //password
   }
+}
+
+config.jwtOptions = {
+  secret: 'Esd12$0&^%!o=-'
 }
 
 module.exports = config
