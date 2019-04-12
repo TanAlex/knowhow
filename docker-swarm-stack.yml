@@ -1,0 +1,50 @@
+version: "3"
+
+services:
+  front:
+    image: worker01:5000/knowhow_front
+    ports:
+      - "80:80"
+      - "443:443"
+      - "3000:3000"
+    environment:
+      - ENVIRONMENT=${ENVIRONMENT}      
+    networks:
+        - network_1    
+
+  redis:
+    image: redis:3.2-alpine
+    ports:
+      - "6379"
+    networks:
+      - network_1
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+
+  mysql:
+    image: mysql:5.7
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - network_1
+    ports:
+      - "3306:3306"
+    restart: always  
+    environment:
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: p@ssword!
+      MYSQL_DATABASE: knowhow
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: p@ssw0rd!      
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+
+
+
+networks:
+    network_1:
+
+volumes:
+   db-data:
