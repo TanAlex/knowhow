@@ -4,10 +4,12 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var sassMiddleware = require('node-sass-middleware');
+const bodyParser = require('body-parser');
+const { ApolloServer } = require ('apollo-server-express');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var apiRouter   = require('./routes/api');
+var apiRouter = require('./routes/api');
 
 var app = express();
 
@@ -50,13 +52,35 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/api', apiRouter);
 
+// The GraphQL endpoint
+let schema = require('./graphql/schema');
+if (env == 'PROD' && env != "PRODUCTION"){
+  schema.playground ={
+    settings: {
+      'editor.theme': 'light',
+    },
+    // tabs: [
+    //   {
+    //     endpoint,
+    //     query: defaultQuery,
+    //   },
+    // ],
+  }
+}else{
+  schema.playground = false;
+}
+const apollo = new ApolloServer(schema)
+
+
+apollo.applyMiddleware({ app, path: '/graphql' });
+
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

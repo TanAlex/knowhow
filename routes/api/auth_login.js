@@ -21,8 +21,8 @@ module.exports = function (router) {
     }
 
     async function logout(req, res, result) {
-        if(req.session) { req.session.destroy(); }
-        result.message="Successfully logged out";
+        if (req.session) { req.session.destroy(); }
+        result.message = "Successfully logged out";
     }
 
     router.post('/login', wrapper(login));
