@@ -5,7 +5,7 @@ module.exports =  async function login(req, res, next) {
         data: null
     }
     // Skip session checking if it's login request
-    console.log(req.session);
+    //console.log(req.session);
     if(req.path && req.path.match(/^\/login$/i)){
         next();
     }else if(req.session && req.session.user && req.session.user.username){

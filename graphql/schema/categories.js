@@ -34,8 +34,9 @@ const resolvers = {
     category: (root, { id }, {services: {categories}}) => categories.get_category_articles_by_id(id),
   },
   Article: {
-    category:  async (parent, param, {services: {categories}}) => {
+    category:  async (parent, param, {user, services: {categories}}) => {
       let result = await categories.get_category_by_id(parent.category_id);
+      console.log("login user:", user);
       Object.assign(result, {
         category_id: result.id,
         category_name: result.name,

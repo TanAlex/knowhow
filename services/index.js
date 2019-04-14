@@ -1,8 +1,7 @@
 const path = require('path');
 const globby = require('globby');
-let db = global.db;
 
-
+let _default = null;
 
 let service_factory = function (context = {}) {
 
@@ -20,14 +19,22 @@ let service_factory = function (context = {}) {
         }
     });
 
-    //console.log(service)
+
+    if (service.db && service.configs && !_default) {
+        _default = service;
+    }
+    console.log(`service_factory called, _default:  ${_default}`);
     return service;
 }
 
 
-if (global.db) {
-    service_factory.default = service_factory()
-}
-
+Object.defineProperty(service_factory, 'default', {
+    get() {
+        if (!_default && global.db) {
+            _default = service_factory();
+        } 
+        return _default;
+    }
+});
 
 module.exports = service_factory;

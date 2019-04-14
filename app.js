@@ -7,15 +7,11 @@ var sassMiddleware = require('node-sass-middleware');
 const bodyParser = require('body-parser');
 
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var apiRouter = require('./routes/api');
+
 
 var app = express();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+
 
 var DB = require('./libs/DB');
 
@@ -24,8 +20,7 @@ var DB = require('./libs/DB');
 const env = process.env.ENVIRONMENT || "DEV"
 global.configs = require(`./configs/configs.${env}.js`);
 global.db = new DB(configs.dbConfig);
-const service_factory = require('./services');
-app._services = service_factory.default = service_factory();
+app._services = require('./services')({ db, configs });
 
 var session = require('express-session');
 var MySQLStore = require('express-mysql-session')(session);
@@ -49,6 +44,14 @@ app.use(sassMiddleware({
   sourceMap: true
 }));
 app.use(express.static(path.join(__dirname, 'public')));
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
+var apiRouter = require('./routes/api');
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

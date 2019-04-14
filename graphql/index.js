@@ -61,7 +61,6 @@ module.exports = {
             // }
             if (app._services) {
                 context.services = app._services;
-                console.log("app._services", context.services);
             }
             return context;
         },
