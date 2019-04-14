@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var sassMiddleware = require('node-sass-middleware');
 const bodyParser = require('body-parser');
-const { ApolloServer } = require ('apollo-server-express');
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -24,6 +24,8 @@ var DB = require('./libs/DB');
 const env = process.env.ENVIRONMENT || "DEV"
 global.configs = require(`./configs/configs.${env}.js`);
 global.db = new DB(configs.dbConfig);
+const service_factory = require('./services');
+app._services = service_factory.default = service_factory();
 
 var session = require('express-session');
 var MySQLStore = require('express-mysql-session')(session);
@@ -52,27 +54,12 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/api', apiRouter);
 
-// The GraphQL endpoint
-let schema = require('./graphql/schema');
-if (env == 'PROD' && env != "PRODUCTION"){
-  schema.playground ={
-    settings: {
-      'editor.theme': 'light',
-    },
-    // tabs: [
-    //   {
-    //     endpoint,
-    //     query: defaultQuery,
-    //   },
-    // ],
-  }
-}else{
-  schema.playground = false;
-}
-const apollo = new ApolloServer(schema)
+// Start GraphQL related part
 
+const graphql = require("./graphql");
+graphql.addToApp(app);
 
-apollo.applyMiddleware({ app, path: '/graphql' });
+// End GraphQL related part
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

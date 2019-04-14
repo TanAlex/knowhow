@@ -1,4 +1,4 @@
-const categories = require('../../services/categories');
+const { categories } = require('../../services')();
 const wrapper = require('./wrapper');
 
 module.exports = function(router){
